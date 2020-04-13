@@ -13118,10 +13118,28 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Simulacion-del-grado-de-propagacion-de-la-Covid-19-Ecuador">Simulacion del grado de propagacion de la Covid-19 Ecuador<a class="anchor-link" href="#Simulacion-del-grado-de-propagacion-de-la-Covid-19-Ecuador">&#182;</a></h1><p>Para realizar esta  simulacion se utilizar la libreria pygame para ello se debe instalar pygame</p>
 <p>conda install -c cogsci pygame.</p>
-<h2 id="Introduccion">Introduccion<a class="anchor-link" href="#Introduccion">&#182;</a></h2><p>En una epidemia, el parámetro fundamental, del que todo depende, es R0. Este símbolo se refiere al número de personas que, de media, cada infectado contagia antes de convertirse en inofensivo ( bien porque está en aislamiento, hospitalizado o ha muerto).
-El valor R0 es fundamental, porque si es grande, el contagio se alarga más rápidamente. Si R0 es 2, y si el tiempo medio en el que se permanece contagiados es una semana, y hay 1.000 infectados, entonces después de una semana los infectados será 3.000 (los 1.000 del inicio más 2.000 nuevos contagiados). 
-Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de partida más 5.000 nuevos contagiados). A este punto, el ciclo vuelve a partir, con más o menos retraso, dependiendo de cuánto tiempo un nuevo infectado emplea en convertirse a sí mismo en contagioso.</p>
-<p>Se reconstruye la dinámica de transmisión de una enfermedad inventada con cuatro escenarios diversos: 1. Sin ninguna medida de contención; 2. Con la cuarentena absoluta, aunque se «escapa» algún infectado; 3. Con formas de aislamiento y la distancia de seguridad entre personas que permiten salir solo a un ciudadano de cada cuatro; 4. Si sale solamente un ciudadano de cada ocho. En definitiva, solo con el aislamiento se puede contener la epidemia y lograr que la respuesta sanitaria sea eficaz. <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">https://www.washingtonpost.com/graphics/2020/world/corona-simulator/</a></p>
+<h2 id="Introduccion">Introduccion<a class="anchor-link" href="#Introduccion">&#182;</a></h2><p>En una epidemia, el parámetro fundamental, del que todo depende, es R0. Este símbolo se refiere al número de personas que, mede cada infectado contagia antes de convertirse en inofensivo ( bien porque está en aislamiento, hospitalizado o ha muerto).</p>
+<p>El valor R0 es fundamental, porque si es grande, el contagio se alarga más rápidamente. Si R0 es 2, y si el tiempo medio en el que se permanece contagiados es una semana, y hay 1.000 infectados, entonces después de una semana los infectados será 3.000 (los 1.000 del inicio más 2.000 nuevos contagiados).</p>
+<p>Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de partida más 5.000 nuevos contagiados). A este punto, el ciclo vuelve a partir, con más o menos retraso, dependiendo de cuánto tiempo un nuevo infectado emplea en convertirse a sí mismo en contagioso.</p>
+<p>Se reconstruye la dinámica de transmisión de una enfermedad inventada con cuatro escenarios diversos:</p>
+<ul>
+<li><ol>
+<li>Sin ninguna medida de contención; </li>
+</ol>
+</li>
+<li><ol>
+<li>Con la cuarentena absoluta, aunque se «escapa» algún infectado; </li>
+</ol>
+</li>
+<li><ol>
+<li>Con formas de aislamiento y la distancia de seguridad entre personas que permiten salir solo a un ciudadano de cada cuatro; </li>
+</ol>
+</li>
+<li><ol>
+<li>Si sale solamente un ciudadano de cada ocho. En definitiva, solo con el aislamiento se puede contener la epidemia y lograr que la respuesta sanitaria sea eficaz. <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">https://www.washingtonpost.com/graphics/2020/world/corona-simulator/</a></li>
+</ol>
+</li>
+</ul>
 <p>Entonces, el número reproductivo (R0): Este valor representa el número promedio de personas que un individuo infectado puede contagiar. Para el COVID-19, se estima que se encuentra entre 1.4 y 4 (Qun Li, 2020). Ademas segun  estimaciones de la OMS la probabilidad de fallecimiento es de 1.2% - 4.2%  segun <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext">https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext</a></p>
 
 </div>
@@ -13129,28 +13147,30 @@ Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de part
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randrange</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randrange</span> <span class="c1"># Obtener un numero randomico</span>
 <span class="kn">import</span> <span class="nn">pygame</span>
 
 <span class="c1">#Parametros de inicio</span>
-<span class="n">PROBA_MUERTE</span> <span class="o">=</span> <span class="mf">4.2</span>  <span class="c1"># Probabilidad de que la gente muera COVID</span>
-<span class="n">CONTAGION_RATE</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># Factor R0 para la simulacion COVID probabilidad</span>
+<span class="n">PROBA_MUERTE</span> <span class="o">=</span> <span class="mf">8.4</span>  <span class="c1"># Probabilidad de que la gente muera COVID</span>
+<span class="n">CONTAGION_RATE</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># Factor R0 para la simulacion COVID probabilidad</span>
 <span class="n">PROBA_INFECT</span> <span class="o">=</span> <span class="n">CONTAGION_RATE</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="n">PROBA_VACU</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Probabilidad de que exista una vacuna, COVID = 0</span>
-<span class="n">SIMULACION_SPEED</span> <span class="o">=</span> <span class="mi">25</span> <span class="c1"># Tiempo de un dia en milisegundos</span>
+<span class="n">SIMULACION_SPEED</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># Tiempo de un dia en milisegundos (Cada 25 es un dia)</span>
 <span class="n">nb_rows</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#Numero de filas</span>
 <span class="n">nb_cols</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#Numero de columnas</span>
 
-<span class="k">global</span> <span class="n">display</span><span class="p">,</span> <span class="n">myfont</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">states_temp</span>
+<span class="k">global</span> <span class="n">display</span><span class="p">,</span> <span class="n">myfont</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">states_temp</span> <span class="c1">#Declaracion de variables globales</span>
 
-<span class="n">WHITE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="c1">#Declaro colores en formato RGB</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span> 
 <span class="n">BLUE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 <span class="n">GREEN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">BLACK</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
+<span class="c1">#Obtiene los vecinos dado un punto x,y</span>
 <span class="k">def</span> <span class="nf">get_vecinos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">incx</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">incy</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -13158,6 +13178,7 @@ Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de part
     <span class="n">incy</span> <span class="o">=</span> <span class="p">(</span><span class="n">incy</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">incx</span>
     <span class="n">y2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">incy</span>
+    <span class="c1">#Validar limites</span>
     <span class="k">if</span> <span class="n">x2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">x2</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">x2</span> <span class="o">&gt;=</span> <span class="n">nb_cols</span><span class="p">:</span>
@@ -13166,14 +13187,16 @@ Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de part
         <span class="n">y2</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">y2</span> <span class="o">&gt;=</span> <span class="n">nb_rows</span><span class="p">:</span>
         <span class="n">y2</span> <span class="o">=</span> <span class="n">nb_rows</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="c1"># Nuevos contagiados</span>
 
+<span class="c1">#Genero las personas que cuentan con inmunidad o vacuna </span>
 <span class="k">def</span> <span class="nf">vacunar</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_cols</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">PROBA_VACU</span><span class="p">:</span>
                 <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
+<span class="c1">#Funcion que permite contar el numero de muertosde la matriz states == -1</span>
 <span class="k">def</span> <span class="nf">contar_muertes</span><span class="p">():</span>
     <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_cols</span><span class="p">):</span>
@@ -13184,119 +13207,81 @@ Si R0 es 5, después de una semana los infectados será 6.000 (los 1.000 de part
 
 <span class="c1">#Definimos datos de inicio</span>
 <span class="n">states</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_cols</span> <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">)]</span>
-<span class="n">states_temp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_cols</span> <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">)]</span>
 <span class="n">states_temp</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">states</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">it</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Iteraciones</span>
-<span class="n">total_muerte</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">vacunar</span><span class="p">()</span>
+<span class="n">states</span><span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">50</span><span class="p">)][</span><span class="n">randrange</span><span class="p">(</span><span class="mi">50</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Estado inicial de la simulacion Posicion del Infectado</span>
+<span class="n">it</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Variable para contar las Iteraciones</span>
+<span class="n">total_muerte</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Contabiliza el numero de muertos</span>
+<span class="n">vacunar</span><span class="p">()</span> <span class="c1">#Llamar a la funcion vacunar</span>
 
-<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-<span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-<span class="n">display</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span><span class="mi">750</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
-<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Simulacion de Epidemia Covid-19 Ecuador&quot;</span><span class="p">)</span>
-<span class="n">font</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="s1">&#39;Calibri&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
-<span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">WHITE</span><span class="p">)</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span> <span class="c1">#Incializo el motor de juegos pygame</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">init</span><span class="p">()</span> <span class="c1">#Inicializo el tipo de letra</span>
+<span class="n">display</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span><span class="mi">750</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span> <span class="c1">#Tamanio de la ventana</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Simulacion de Epidemia Covid-19 Ecuador&quot;</span><span class="p">)</span><span class="c1"># Titulo</span>
+<span class="n">font</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="s1">&#39;Calibri&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span> <span class="c1"># Tipo de letra</span>
+<span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">WHITE</span><span class="p">)</span> <span class="c1"># Color de fondo</span>
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">SIMULACION_SPEED</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">SIMULACION_SPEED</span><span class="p">)</span> <span class="c1"># Sleep o pausa</span>
     <span class="n">it</span> <span class="o">=</span> <span class="n">it</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">it</span> <span class="o">&lt;=</span> <span class="mi">10000</span> <span class="ow">and</span> <span class="n">it</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">states_temp</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">states_temp</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#Copia de la matriz</span>
+        <span class="c1">#Recorrera la matriz</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_cols</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">):</span>
                 <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                     <span class="k">pass</span>
-                <span class="k">if</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span> <span class="c1"># Numero de dias de contagio</span>
                     <span class="n">states_temp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">PROBA_MUERTE</span><span class="p">:</span>
-                        <span class="n">states_temp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">PROBA_MUERTE</span><span class="p">:</span> <span class="c1"># Genero un randomico para verificar si fallece o se recupera</span>
+                        <span class="n">states_temp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># Muere</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">states_temp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">state</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">PROBA_INFECT</span><span class="p">:</span>
-                        <span class="n">neighbour</span> <span class="o">=</span> <span class="n">get_vecinos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                        <span class="n">states_temp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Cura o recupera</span>
+                <span class="k">if</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">state</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span> <span class="c1"># Rango de infectado</span>
+                    <span class="k">if</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">PROBA_INFECT</span><span class="p">:</span> <span class="c1"># Infecto a las personas cercanas entre  10 y 20 </span>
+                        <span class="n">neighbour</span> <span class="o">=</span> <span class="n">get_vecinos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1">#Obtenemos los vecinos a contagiar</span>
                         <span class="n">x2</span> <span class="o">=</span> <span class="n">neighbour</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                         <span class="n">y2</span> <span class="o">=</span> <span class="n">neighbour</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                         <span class="n">neigh_state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">]</span>
-                        <span class="k">if</span> <span class="n">neigh_state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="n">states_temp</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+                        <span class="k">if</span> <span class="n">neigh_state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#Verifico que este sano</span>
+                            <span class="n">states_temp</span><span class="p">[</span><span class="n">x2</span><span class="p">][</span><span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Contagia</span>
         <span class="n">states</span> <span class="o">=</span> <span class="n">states_temp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">total_muerte</span> <span class="o">=</span> <span class="n">contar_muertes</span><span class="p">()</span>
+        <span class="n">total_muerte</span> <span class="o">=</span> <span class="n">contar_muertes</span><span class="p">()</span> <span class="c1"># contar el numero de muertos</span>
         
-    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
-    <span class="n">textsurface</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;Total muertes: &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total_muerte</span><span class="p">),</span> <span class="kc">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">122</span><span class="p">))</span>
-    <span class="n">display</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">textsurface</span><span class="p">,</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
-
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span> <span class="c1"># Grafico el fondo</span>
+    <span class="n">textsurface</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;Total muertes: &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total_muerte</span><span class="p">),</span> <span class="kc">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">122</span><span class="p">))</span> <span class="c1">#El numero de muertos</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">textsurface</span><span class="p">,</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span> <span class="c1"># Graficar el texto de muertes</span>
+    <span class="c1">#Graficar el estado del paciente matriz</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_cols</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="n">BLUE</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">BLUE</span> <span class="c1"># No infectado</span>
             <span class="k">if</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="n">GREEN</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">GREEN</span> <span class="c1"># Recupero</span>
             <span class="k">if</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1"># Injectado - Rojo</span>
             <span class="k">if</span> <span class="n">states</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="n">BLACK</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">BLACK</span> <span class="c1"># Muerto</span>
             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
             <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">display</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
+    <span class="c1">#Escuachar los eventos del teclado</span>
     <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
-            <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span> <span class="c1">#Presiona y Escape</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1">#Termino simulacion</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">:</span> <span class="c1">#Presiona y espacio</span>
             <span class="c1">#Reiniciamos valores</span>
             <span class="n">states</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_cols</span> <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">)]</span>
-            <span class="n">states_temp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_cols</span> <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">)]</span>
             <span class="n">states_temp</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">states</span><span class="p">[</span><span class="mi">50</span><span class="p">][</span><span class="mi">50</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="n">states</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
             <span class="n">it</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">total_muerte</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">vacunar</span><span class="p">()</span>
+            <span class="n">vacunar</span><span class="p">()</span> <span class="c1">#Llamar a la funcion vacunar</span>
             
-    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span><span class="c1"># Mandar actualizar la ventana</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>pygame 1.9.6
-Hello from the pygame community. https://www.pygame.org/contribute.html
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">error</span>                                     Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-92aee82b94e7&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">    123</span>             vacunar<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    124</span> 
-<span class="ansi-green-fg">--&gt; 125</span><span class="ansi-red-fg">     </span>pygame<span class="ansi-blue-fg">.</span>display<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">error</span>: video system not initialized</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13304,16 +13289,16 @@ Hello from the pygame community. https://www.pygame.org/contribute.html
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>En concecuencia, generar 5 simulaciones:</p>
+<h1 id="Practica">Practica<a class="anchor-link" href="#Practica">&#182;</a></h1><p>En concecuencia, generar 5 simulaciones:</p>
 <ol>
 <li>R0 obtenidos de la prediccion del SIR (Trabajo anterior)</li>
 <li>Predecir que va a ocurrir la proxima semana.</li>
 <li>El valor 4, el cual representaría el peor de los casos. </li>
 <li>El valor 1.4 en el mejor de los casos</li>
-<li>R0 sin las medidas tomadas</li>
+<li>R0 con las medidas realizadas por el Ecuador, obtenemos el R0 solo de los dias sin cuarentena y lo evaluan con los las acciones de la cuarentena.</li>
 </ol>
 <p>Finalmente, agregar el numero de dias transcurridos, personas recuperadas y generar la curva SIR de las simulaciones.</p>
-<p>Plantee y realize mejoras al modelo de simulacion.</p>
+<p>Puntos extras: Plantee y realize mejoras al modelo de simulacion.</p>
 
 </div>
 </div>
